@@ -1,0 +1,32 @@
+<div class="information">
+    <h3 class="mb-3">
+        Aplicación <br>
+        OLSoftware
+    </h3>
+    <p>Prueba técnica FrontEnd Senior</p>
+</div>
+<div class="form">
+    <div class="title-form">
+        <h4 class="text-center mb-4">Inicio de sesión</h4>
+    </div>
+    <div class="body-form">
+        <form [formGroup]="form" (submit)="send()" autocomplete="off" errorTailor>
+            <div class="container-form">
+                <div class="input-group">
+                    <input id="users" formControlName="users" type="text" class="form-control border-bottom" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1" >
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="input-group mb-4">
+                    <input id="password" formControlName="password" type="password" class="form-control" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
+                        <i class="fa fa-lock"
+                        aria-hidden="true"></i>
+                </div>
+            </div>
+            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div>
+            valido: {{ form.valid | json }}
+        </div>
+    </div>
+</div>
+<div class="footer text-center"> <p>OLSoftware - 2021</p></div>
