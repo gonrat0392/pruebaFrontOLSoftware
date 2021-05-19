@@ -1,1 +1,321 @@
-<p>users works!</p>
+<div id="sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <app-header id="header"></app-header>
+  <div id="container">
+    <div class="createUser containerUser">
+        <div class="headerUser">
+            <div class="titleUser">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <h6>Usuarios existentes</h6>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#modalCreate">Crear</button>
+        </div>
+        <div class="bodyUser">
+            <table class="table table-striped table-inverse table-responsive text-center">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>identificación (C.C.)</th>
+                        <th>Rol asociado</th>
+                        <th>Estado</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td scope="row">{{ user.name }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.document }}</td>
+                        <td>{{ user.rol }}</td>
+                        <td>{{ user.state }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <i class="fa fa-pencil" aria-hidden="true" data-bs-toggle="modal" (click)="listarDatos(user)" data-bs-target="#modalEdit"> </i>
+                            <i class="fa fa-trash" aria-hidden="true" data-bs-toggle="modal" (click)="listarRemove(user)" data-bs-target="#modalRemove"> </i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="searchUser containerUser">
+        <h6 class="text-center"><i class="fa fa-user"> </i> filtrar búsqueda</h6>
+        <form>
+            <div class="form-group">
+                <label for="">Nombres</label>
+                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="">Apellidos</label>
+                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="">Identificación (C.C.)</label>
+                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="">Rol Asociado</label>
+                <select class="form-select">
+                    <option *ngFor="let rol of roles">{{ rol.name }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Estado</label>
+                <select class="form-select" >
+                    <option *ngFor="let state of states">{{ state.name }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Teléfono</label>
+                <input type="tel" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="">Correo</label>
+                <input type="email" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="containerButton">
+                <button type="button" name="" id="" class="btn btn-green" btn-lg btn-block> Buscar </button>
+                <button type="button" name="" id="" class="btn btn-green-inverse" btn-lg btn-block> Limpiar </button>
+            </div>
+        </form>
+    </div>
+  </div>
+  <app-footer id="footer"></app-footer>
+<!-- Modal -->
+<div class="modal fade modalForm" id="modalCreate" tabindex="-1" aria-labelledby="modalCreateLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modalCreateLabel">Agregar nuevo usuario</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form [formGroup]="form" (submit)="send()" autocomplete="off" errorTailor>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Nombres</label>
+                                    <input type="text" class="form-control" aria-describedby="helpId"
+                                        formControlName="name" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Apellidos</label>
+                                    <input type="text" class="form-control" aria-describedby="helpId"
+                                        formControlName="lastname" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Identificación (C.C.)</label>
+                                    <input type="text" class="form-control" aria-describedby="helpId"
+                                        formControlName="document" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Rol Asociado</label>
+                                    <select class="form-select" formControlName="rol">
+                                        <option value="0" selected>- seleccione una opción -</option>
+                                        <option *ngFor="let rol of roles">{{ rol.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Estado</label>
+                                    <select class="form-select" formControlName="state">
+                                        <option value="0" selected>- seleccione una opción -</option>
+                                        <option *ngFor="let state of states">{{ state.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Contraseña</label>
+                                    <input type="password" class="form-control" aria-describedby="helpId"
+                                        formControlName="pass" [controlErrorsTpl]="passError" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Teléfono</label>
+                                    <input type="tel" class="form-control" aria-describedby="helpId"
+                                        formControlName="phone" [controlErrorsTpl]="phoneError" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Correo</label>
+                                    <input type="email" class="form-control" aria-describedby="helpId"
+                                        formControlName="email" [controlErrorsTpl]="emailError" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="form.invalid" type="submit" class="btn btn-green">Crear usuario</button>
+                    <button type="button" class="btn btn-green-inverse" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalForm" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modalEditLabel">Actualizar usuario</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form [formGroup]="form" (submit)="sendUpdate()" autocomplete="off">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Nombres</label>
+                                    <input type="text" value="user.name" class="form-control" aria-describedby="helpId"
+                                        formControlName="name" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Apellidos</label>
+                                    <input type="text" value="user.lastname" class="form-control" aria-describedby="helpId"
+                                        formControlName="lastname" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Identificación (C.C.)</label>
+                                    <input type="text" value="user.document" disabled class="form-control" aria-describedby="helpId"
+                                        formControlName="document" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Rol Asociado</label>
+                                    <select class="form-select" formControlName="rol">
+                                        <option value="0" selected>- seleccione una opción -</option>
+                                        <option *ngFor="let rol of roles">{{ rol.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Estado</label>
+                                    <select class="form-select" formControlName="state">
+                                        <option value="0" selected>- seleccione una opción -</option>
+                                        <option *ngFor="let state of states">{{ state.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Contraseña</label>
+                                    <input type="password" disabled class="form-control" aria-describedby="helpId"
+                                        formControlName="pass" [controlErrorsTpl]="passError" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Teléfono</label>
+                                    <input type="tel" value="user.phone" class="form-control" aria-describedby="helpId"
+                                        formControlName="phone" [controlErrorsTpl]="phoneError" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-4">
+                                    <label for="">Correo</label>
+                                    <input type="email" value="user.email" class="form-control" aria-describedby="helpId"
+                                        formControlName="email" [controlErrorsTpl]="emailError" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="form.invalid" (click)="sendUpdate()" type="submit" class="btn btn-green">Guardar</button>
+                    <button type="button" class="btn btn-green-inverse" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalForm" id="modalRemove" tabindex="-1" aria-labelledby="modalRemoveLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modalRemoveLabel">Eliminar usuario</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="rwo">
+                            <div class="col-md-12">
+                                <p>Esta seguro que desea eliminar al usuario <b>{{ name }} {{ lastname }}</b> que se 
+                                    identifica con el número de documento <b>{{ document }}</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" (click)="sendRemove" class="btn btn-green">Si</button>
+                    <button type="button" class="btn btn-green-inverse" data-bs-dismiss="modal">No</button>
+                </div>
+        </div>
+    </div>
+</div>
+
+<ng-template class="menssageError" let-error let-text="text" #passError>
+    <div class="minError" *ngIf="error?.minlength">
+        <i>Son minimo {{error?.minlength.requiredLength}} carácteres requeridos</i><br>
+        <span>ingresaste solo {{error?.minlength.actualLength}} carácteres</span>
+    </div>
+    <div class="minError" *ngIf="error?.required">
+        <i>Este campo es obligatorio</i><br>
+    </div>
+</ng-template>
+
+<ng-template class="menssageError" let-error let-text="text" #phoneError>
+    <div class="minError" *ngIf="error?.minlength">
+        <i>Son minimo {{error?.minlength.requiredLength}} carácteres requeridos</i><br>
+        <span>ingresaste solo {{error?.minlength.actualLength}} carácteres</span>
+    </div>
+    <div class="minError" *ngIf="error?.maxlength">
+        <i>Son máximo {{error?.maxlength}} carácteres requeridos</i><br>
+        <span>ingresaste {{error?.maxlength}} carácteres</span>
+    </div>
+
+    <div class="minError" *ngIf="error?.required">
+        <i>Este campo es obligatorio</i><br>
+    </div>
+</ng-template>
+
+<ng-template class="menssageError" let-error let-text="text" #emailError>
+    <div class="minError" *ngIf="error?.email">
+        <i>No es un correo valido</i><br>
+    </div>
+
+    <div class="minError" *ngIf="error?.required">
+        <i>Este campo es obligatorio</i><br>
+    </div>
+</ng-template>

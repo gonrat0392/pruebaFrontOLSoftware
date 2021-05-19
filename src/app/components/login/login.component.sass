@@ -1,5 +1,6 @@
-body
-    background-color: red !important
+img
+    height: 100%
+    width: 100%
 .border-bottom
     border-bottom: 1px solid #d5d5d5
 .information
@@ -17,15 +18,19 @@ body
     border-radius: 8%
     right: 10%
     background-color: #ffffff
-    -webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.12)
-    -moz-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.12)
-    box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.12)
+    -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.1)
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.1)
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.1)
     .title-form
         color: #707070
     .container-form
         -webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.12)
         -moz-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.12)
         box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.12)
+        .ng-touched
+            border: 2px solid red
+        .ng-valid
+            border: 2px solid green
     .form-control
         border: none
         border-radius: 0rem
@@ -34,12 +39,36 @@ body
         width: 100%
         &::placeholder
             color: #d2d2d2
+        &::focus
+            outline: none
+            box-shadow: none
+    b
+        position: absolute
+        left: 0
+        bottom: -5.5rem
+        color: red
+    .minError
+        i
+            color: red
+            font-size: 0.8rem
+            position: relative
+            float: left
+            margin: -1rem 0 0 0.8rem
+            width: 100%
+            background-color: transparent
+        span
+            color: red
+            font-size: 0.7rem
+            margin: -0.3rem 0 0 0.1rem
+            position: relative
+            float: left
+
     i
         color: #d2d2d2
         font-size: 1.2rem
         position: absolute
         right: 5%
-        top: 30%
+        top: 1rem
     .btn
         width: 100%
         background-color: #2d50de
@@ -51,4 +80,4 @@ body
     font-weight: 800
     bottom: 0
     color: #999999
-    padding: 0.7% 0 
+    padding: 0.7% 0

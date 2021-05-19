@@ -1,3 +1,4 @@
+<img src="../../../assets/img/Background7.jpg" alt="">
 <div class="information">
     <h3 class="mb-3">
         Aplicación <br>
@@ -13,20 +14,48 @@
         <form [formGroup]="form" (submit)="send()" autocomplete="off" errorTailor>
             <div class="container-form">
                 <div class="input-group">
-                    <input id="users" formControlName="users" type="text" class="form-control border-bottom" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1" >
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                    <input id="users" class="form-control border-bottom" placeholder="Usuario" 
+                        formControlName="users" type="text" aria-label="Username"
+                        [controlErrorsTpl] = "userError"
+                        aria-describedby="basic-addon1" >
+                    <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
                 <div class="input-group mb-4">
-                    <input id="password" formControlName="password" type="password" class="form-control" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
-                        <i class="fa fa-lock"
-                        aria-hidden="true"></i>
+                    <input id="password" class="form-control" placeholder="Contraseña"
+                        formControlName="password" type="password" aria-label="password"
+                        [controlErrorsTpl] = "passwordError"
+                        aria-describedby="basic-addon1">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
                 </div>
             </div>
             <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Submit</button>
         </form>
         <div>
-            valido: {{ form.valid | json }}
+            <!--valido: {{ form.valid | json }}-->
         </div>
     </div>
 </div>
 <div class="footer text-center"> <p>OLSoftware - 2021</p></div>
+
+
+<ng-template class="menssageError" let-error let-text="text" #passwordError>
+    <div class="minError" *ngIf="error?.minlength">
+        <i>Son minimo {{error?.minlength.requiredLength}} carácteres requeridos</i><br>
+        <span>ingresaste solo {{error?.minlength.actualLength}} carácteres</span>
+    </div>
+
+    <div class="minError" *ngIf="error?.required">
+        <i>Este campo es obligatorio</i><br>
+    </div>
+</ng-template>
+
+<ng-template class="menssageError" let-error let-text="text" #userError>
+    <div class="minError" *ngIf="error?.minlength">
+        <i>Son minimo {{error?.minlength.requiredLength}} carácteres requeridos</i><br>
+        <span>ingresaste solo {{error?.minlength.actualLength}} carácteres</span>
+    </div>
+
+    <div class="minError" *ngIf="error?.required">
+        <i>Este campo es obligatorio</i><br>
+    </div>
+</ng-template>
